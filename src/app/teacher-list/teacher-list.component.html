@@ -1,0 +1,28 @@
+<div class="container">
+    <h1>Listagem de professores</h1> <span class="pull-right"><a class="btn btn-info"
+            routerLink="/teacher-create">Registrar +</a></span>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="hasTeachersEmpty">
+                <td colspan="3">Nenhum registro encontrado!</td>
+            </tr>
+
+            <tr *ngFor="let teacher of teachers">
+                <td>{{teacher.name}}</td>
+                <td>{{teacher.email}}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm">Editar</a>&nbsp;
+                    <a class="btn btn-danger btn-sm" (click)="deleteTeacher(teacher.id!!)">Deletar</a>&nbsp;
+                    <a class="btn btn-success btn-sm" routerLink="/teacher-details/{{teacher.id}}">Visualizar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
