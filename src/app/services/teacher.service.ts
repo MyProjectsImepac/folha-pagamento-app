@@ -11,7 +11,7 @@ export class TeacherService {
   constructor(private httpClient: HttpClient) { }
 
   save(teacher: Teacher): void {
-    this.httpClient.post("http://localhost:8080/folha-pagamento/teacher", teacher).subscribe(
+    this.httpClient.post("http://localhost:8081/folha-pagamento/teacher", teacher).subscribe(
       {
         next: (response) => {
           console.log(response);
@@ -27,15 +27,15 @@ export class TeacherService {
   }
 
   findById(id: number) {
-    return this.httpClient.get(`http://localhost:8080/folha-pagamento/teacher/${id}`);
+    return this.httpClient.get(`http://localhost:8081/folha-pagamento/teacher/${id}`);
   }
 
   findAll() {
-    return this.httpClient.get("http://localhost:8080/folha-pagamento/teacher");
+    return this.httpClient.get("http://localhost:8081/folha-pagamento/teacher");
   }
 
   delete(id: number): void {
-    this.httpClient.delete(`http://localhost:8080/folha-pagamento/teacher/${id}`).subscribe();
+    this.httpClient.delete(`http://localhost:8081/folha-pagamento/teacher/${id}`).subscribe();
   }
 
   edit(teacher: Teacher): Teacher {
