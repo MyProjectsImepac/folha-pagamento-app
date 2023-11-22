@@ -1,7 +1,7 @@
-import { Address } from './address-api';
+import { AddressApi } from './address-api';
 
 describe('Address', () => {
   it('should create an instance', () => {
-    expect(new Address()).toBeTruthy();
+    expect(new AddressApi()).toBeTruthy();
   });
 });

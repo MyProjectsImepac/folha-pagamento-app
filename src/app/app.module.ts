@@ -11,6 +11,12 @@ import { TeacherCreateComponent } from './teacher-create/teacher-create.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TeacherDetailsComponent } from './teacher-details/teacher-details.component';
+import { collaboratorListComponent } from './collaborator-list/collaborator-list.component';
+import { Collaborator } from './entities/collaborator';
+import { CollaboratorDetailsComponent } from './collaborator-details/collaborator-details.component';
+import { CollaboratorCreateComponent } from './collaborator-create/collaborator-create.component';
+import { CollaboratorUpdateComponent } from './collaborator-update/collaborator-update.component'
+
 
 @NgModule({
   declarations: [
@@ -20,6 +26,10 @@ import { TeacherDetailsComponent } from './teacher-details/teacher-details.compo
     TeacherListComponent,
     TeacherCreateComponent,
     TeacherDetailsComponent,
+    collaboratorListComponent,
+    CollaboratorDetailsComponent,
+    CollaboratorCreateComponent,
+    CollaboratorUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +38,11 @@ import { TeacherDetailsComponent } from './teacher-details/teacher-details.compo
       { path: 'about-us', component: AboutUsComponent },
       { path: 'teacher-create', component: TeacherCreateComponent },
       { path: 'teacher-details/:id', component: TeacherDetailsComponent },
-      { path: '', component: AboutUsComponent }
+      { path: '', component: AboutUsComponent },
+      { path: 'collaborator-list', component: collaboratorListComponent },
+      { path: 'about-us', component: AboutUsComponent },
+      { path: 'collaborator-create', component: CollaboratorCreateComponent },
+      { path: 'collaborator-details/:id', component: CollaboratorDetailsComponent }
     ]),
     FormsModule,
     ReactiveFormsModule,

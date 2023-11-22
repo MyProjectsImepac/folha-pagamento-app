@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Signal, ViewChild } from '@angular/core';
-import { TeacherService } from '../services/teacher.service/teacher.service';
-import { Teacher } from '../entities/teacher';
+import {CollaboratorService } from '../services/collaborator-service/collaborator.service';
+import {Collaborator } from '../entities/collaborator';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { AddressApi } from '../utils/address-api';
@@ -8,14 +8,14 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-teacher-create',
-  templateUrl: './teacher-create.component.html',
-  styleUrls: ['./teacher-create.component.css']
+  selector: 'app-collaborator-create',
+  templateUrl: './collaborator-create.component.html',
+  styleUrls: ['./collaborator-create.component.css']
 })
 
-export class TeacherCreateComponent implements OnInit {
+export class CollaboratorCreateComponent implements OnInit {
 
-  teacher: Teacher = new Teacher();
+  collaborator: Collaborator = new Collaborator();
 
   addressApi: AddressApi = new AddressApi();
 
@@ -26,13 +26,13 @@ export class TeacherCreateComponent implements OnInit {
     complement: '', neighborhood: '', city: '', state: '', zipCode: '', number: ''
   });
 
-  constructor(private teacherService: TeacherService, private formBuilder: FormBuilder, private httpClient: HttpClient, private router: Router) { }
+  constructor(private collaboratorService: CollaboratorService, private formBuilder: FormBuilder, private httpClient: HttpClient, private router: Router) { }
 
   ngOnInit(): void { }
 
-  addTeacher() {
-    this.formDataToTeacher()
-    this.teacherService.save(this.teacher).subscribe(
+  addCollaborator() {
+    this.formDataToCollaborator()
+    this.collaboratorService.save(this.collaborator).subscribe(
       (data) => {
         this.router.navigate(["/collaborator-list"]);
       },
@@ -73,16 +73,16 @@ export class TeacherCreateComponent implements OnInit {
     )
   }
 
-  formDataToTeacher() {
-    this.teacher.name = this.formData.get('name')?.value!!;
-    this.teacher.email = this.formData.get('email')?.value!!;
-    this.teacher.address.publicPlace = this.formData.get('publicPlace')?.value!!;
-    this.teacher.address.neighborhood = this.formData.get('neighborhood')?.value!!;
-    this.teacher.address.city = this.formData.get('city')?.value!!;
-    this.teacher.address.state = this.formData.get('state')?.value!!;
-    this.teacher.address.number = this.formData.get('number')?.value!!;
-    this.teacher.address.complement = this.formData.get('complement')?.value!!;
-    this.teacher.address.zipCode = this.formData.get('zipCode')?.value!!;
-    this.teacher.valueHour = parseFloat(this.formData.get('valueHour')?.value!!);
+  formDataToCollaborator() {
+    this.collaborator.name = this.formData.get('name')?.value!!;
+    this.collaborator.email = this.formData.get('email')?.value!!;
+    this.collaborator.address.publicPlace = this.formData.get('publicPlace')?.value!!;
+    this.collaborator.address.neighborhood = this.formData.get('neighborhood')?.value!!;
+    this.collaborator.address.city = this.formData.get('city')?.value!!;
+    this.collaborator.address.state = this.formData.get('state')?.value!!;
+    this.collaborator.address.number = this.formData.get('number')?.value!!;
+    this.collaborator.address.complement = this.formData.get('complement')?.value!!;
+    this.collaborator.address.zipCode = this.formData.get('zipCode')?.value!!;
+    this.collaborator.valueHour = parseFloat(this.formData.get('valueHour')?.value!!);
   }
 }
