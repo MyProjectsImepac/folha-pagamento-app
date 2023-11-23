@@ -1,38 +1,46 @@
-import { Component, Input, OnInit, Signal, ViewChild } from '@angular/core';
-import { TeacherService } from '../services/teacher.service/teacher.service';
+import { Component, OnInit } from '@angular/core';
 import { Teacher } from '../entities/teacher';
-import { FormBuilder, Validators } from '@angular/forms';
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { AddressApi } from '../utils/address-api';
-import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Collaborator } from '../entities/collaborator';
+import { HttpClient } from '@angular/common/http';
+import { CollaboratorService } from '../services/collaborator-service/collaborator.service';
+import { TeacherService } from '../services/teacher.service/teacher.service';
 
 @Component({
-  selector: 'app-teacher-create',
-  templateUrl: './teacher-create.component.html',
-  styleUrls: ['./teacher-create.component.css']
+  selector: 'app-teacher-update',
+  templateUrl: './teacher-update.component.html',
+  styleUrls: ['./teacher-update.component.css']
 })
-
-export class TeacherCreateComponent implements OnInit {
-
-  teacher: Teacher = new Teacher();
-
-  addressApi: AddressApi = new AddressApi();
+export class TeacherUpdateComponent implements OnInit {
 
   showErrorAlert: boolean = false;
 
+  ngOnInit(): void {
+    this.initializeObject();
+  }
+  constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, 
+    private teacher: Teacher, private httpClient: HttpClient, 
+    private teacherService: TeacherService, private router: Router) { }
+
   formData = this.formBuilder.group({
-    name: ['', Validators.required], email: ['', [Validators.email, Validators.required]], valueHour: ['', Validators.required], publicPlace: '',
+    name: ["", Validators.required], email: ['', [Validators.email, Validators.required]], valueHour: ['', Validators.required], publicPlace: '',
     complement: '', neighborhood: '', city: '', state: '', zipCode: '', number: ''
   });
 
-  constructor(private teacherService: TeacherService, private formBuilder: FormBuilder, private httpClient: HttpClient, private router: Router) { }
+  initializeObject() {
+    let idLink: any = this.activatedRoute.snapshot.paramMap.get('id');
+    this.teacherService.findById(idLink).subscribe(
+      (teacherApi) => {
+        this.teacher = teacherApi as Teacher;
+        this.getPreviousData(this.teacher);
+      });
+  }
 
-  ngOnInit(): void { }
-
-  addTeacher() {
-    this.formDataToTeacher()
-    this.teacherService.save(this.teacher).subscribe(
+  updateTeacher() {
+    this.formDataToTeacher();
+    this.teacherService.put(this.teacher).subscribe(
       (data) => {
         this.router.navigate(["/teacher-list"]);
       },
@@ -41,8 +49,6 @@ export class TeacherCreateComponent implements OnInit {
       }
     );
   }
-
-
 
   getZipCodeData() {
     this.httpClient.get(`https://viacep.com.br/ws/${this.formData.get('zipCode')?.value}/json`).subscribe({
@@ -72,7 +78,6 @@ export class TeacherCreateComponent implements OnInit {
       }
     )
   }
-
   formDataToTeacher() {
     this.teacher.name = this.formData.get('name')?.value!!;
     this.teacher.email = this.formData.get('email')?.value!!;
@@ -85,4 +90,19 @@ export class TeacherCreateComponent implements OnInit {
     this.teacher.address.zipCode = this.formData.get('zipCode')?.value!!;
     this.teacher.valueHour = parseFloat(this.formData.get('valueHour')?.value!!);
   }
+  getPreviousData(teacher: Teacher) {
+    this.formData.patchValue({
+      name: this.teacher.name,
+      email: this.teacher.email,
+      publicPlace: this.teacher.address.publicPlace,
+      neighborhood: this.teacher.address.neighborhood,
+      city: this.teacher.address.city,
+      state: this.teacher.address.state,
+      number: this.teacher.address.number,
+      complement: this.teacher.address.complement,
+      zipCode: this.teacher.address.zipCode,
+      valueHour: this.teacher.valueHour.toString()
+    });
+  }
+
 }

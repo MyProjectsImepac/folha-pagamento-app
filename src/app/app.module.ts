@@ -15,6 +15,7 @@ import { collaboratorListComponent } from './collaborator-list/collaborator-list
 import { CollaboratorDetailsComponent } from './collaborator-details/collaborator-details.component';
 import { CollaboratorCreateComponent } from './collaborator-create/collaborator-create.component';
 import { CollaboratorUpdateComponent } from './collaborator-update/collaborator-update.component';
+import { TeacherUpdateComponent } from './teacher-update/teacher-update.component';
 
 
 
@@ -30,7 +31,8 @@ import { CollaboratorUpdateComponent } from './collaborator-update/collaborator-
     collaboratorListComponent,
     CollaboratorDetailsComponent,
     CollaboratorCreateComponent,
-    CollaboratorUpdateComponent
+    CollaboratorUpdateComponent,
+    TeacherUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import { CollaboratorUpdateComponent } from './collaborator-update/collaborator-
       { path: 'about-us', component: AboutUsComponent },
       { path: 'collaborator-create', component: CollaboratorCreateComponent },
       { path: 'collaborator-details/:id', component: CollaboratorDetailsComponent },
-      { path: 'collaborator-update/:id', component: CollaboratorUpdateComponent }
+      { path: 'collaborator-update/:id', component: CollaboratorUpdateComponent },
+      { path: 'teacher-update/:id' , component: TeacherUpdateComponent }
     ]),
     FormsModule,
     ReactiveFormsModule,
