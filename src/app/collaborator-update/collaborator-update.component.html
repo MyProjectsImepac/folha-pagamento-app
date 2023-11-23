@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>Registrar colaborador</h1>
+    <h1>Alterar dados colaborador</h1>
 
     <div *ngIf="showErrorAlert" class="alert alert-danger" role="alert">
         Ops! Algo deu errado ao alterar o colaborador. Por favor, tente novamente mais tarde.
@@ -20,7 +20,7 @@
         O valor hora e um campo obrigatório!
     </div>
 
-    <form class="form-horizontal" [formGroup]="formData" (ngSubmit)="updateCollaborator()">
+    <form class="form-horizontal" [formGroup]="formData" >
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">Nome *</label>
             <div class="col-sm-10">

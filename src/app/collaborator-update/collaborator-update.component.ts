@@ -5,7 +5,9 @@ import { Collaborator } from '../entities/collaborator';
 import { AddressApi } from '../utils/address-api';
 import { HttpClient } from '@angular/common/http';
 import { CollaboratorService } from '../services/collaborator-service/collaborator.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-collaborator-update',
@@ -17,24 +19,25 @@ export class CollaboratorUpdateComponent implements OnInit {
   showErrorAlert: boolean = false;
 
   ngOnInit(): void {
+    this.star();
   }
-  constructor(private formBuilder: FormBuilder, private collaborator: Collaborator, private httpClient: HttpClient, private collaboratorService: CollaboratorService, private router: Router) { }
+  constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private collaborator: Collaborator, private httpClient: HttpClient, private collaboratorService: CollaboratorService, private router: Router) { }
 
   formData = this.formBuilder.group({
-    name: ['', Validators.required], email: ['', [Validators.email, Validators.required]], valueHour: ['', Validators.required], publicPlace: '',
+    name: [this.collaborator.name, Validators.required], email: ['', [Validators.email, Validators.required]], valueHour: ['', Validators.required], publicPlace: '',
     complement: '', neighborhood: '', city: '', state: '', zipCode: '', number: ''
   });
 
-  updateCollaborator() {
-    this.formDataToCollaborator();
-    this.collaboratorService.edit(this.collaborator).subscribe(
-      (data) => {
-        this.router.navigate(["/collaborator-list"]);
-      },
-      (error) => {
-        this.showErrorAlert = true;
-      }
-    );
+  star() {
+    let idLink: any = this.activatedRoute.snapshot.paramMap.get('id');
+    this.collaboratorService.findById(idLink).subscribe(
+      (collaboratorApi) => {
+        this.collaborator = collaboratorApi as Collaborator;
+        console.log("Testando");
+        this.formData.patchValue({
+          name: this.collaborator.name
+        });
+      });
   }
 
   getZipCodeData() {

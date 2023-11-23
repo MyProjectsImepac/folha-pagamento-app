@@ -1,5 +1,10 @@
+import { Injectable } from "@angular/core";
 import { Address } from "../utils/address";
 
+@Injectable({
+    providedIn: 'root',
+  })
+  
 export class Teacher {
     id: number | null = null;
     name: string = '';

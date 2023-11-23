@@ -18,7 +18,7 @@
                 <td>{{teacher.name}}</td>
                 <td>{{teacher.email}}</td>
                 <td>
-                    <a class="btn btn-primary btn-sm">Editar</a>&nbsp;
+                    <a class="btn btn-primary btn-sm" routerLink="">Editar</a>&nbsp;
                     <a class="btn btn-danger btn-sm" (click)="deleteTeacher(teacher.id!!)">Deletar</a>&nbsp;
                     <a class="btn btn-success btn-sm" routerLink="/teacher-details/{{teacher.id}}">Visualizar</a>
                 </td>

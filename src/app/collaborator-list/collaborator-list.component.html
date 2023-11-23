@@ -1,6 +1,8 @@
 <div class="container">
-    <h1>Listagem de Cordenadores</h1> <span class="pull-right"><a class="btn btn-info"
-            routerLink="/collaborator-create">Registrar +</a></span>
+    <h1>Listagem de Cordenadores</h1>
+    <span class="pull-right">
+        <a class="btn btn-info" routerLink="/collaborator-create">Registrar +</a>
+    </span>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -18,9 +20,10 @@
                 <td>{{collaborator.name}}</td>
                 <td>{{collaborator.email}}</td>
                 <td>
-                    <a class="btn btn-primary btn-sm">Editar</a>&nbsp;
+                    <a class="btn btn-primary btn-sm" routerLink="/collaborator-update/{{collaborator.id}}">Editar</a>&nbsp;
                     <a class="btn btn-danger btn-sm" (click)="deleteCollaborator(collaborator.id!!)">Deletar</a>&nbsp;
-                    <a class="btn btn-success btn-sm" routerLink="/collaborators-details/{{collaborator.id}}">Visualizar</a>
+                    <a class="btn btn-success btn-sm"
+                        routerLink="/collaborator-details/{{collaborator.id}}">Visualizar</a>
                 </td>
             </tr>
         </tbody>

@@ -35,11 +35,12 @@ export class CollaboratorService {
   }
 
   edit(collaborator: Collaborator): Observable<any> {
-    return this.httpClient.put("http://localhost:8081/folha-pagamento/collaborator", collaborator).pipe(
-      catchError((error: HttpErrorResponse) => {
-        return throwError(error)
-      })
-    );
+    return this.httpClient.put(`http://localhost:8081/folha-pagamento/collaborator/`, collaborator.id)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
+        })
+      );
   }
 
   testando(erro: HttpErrorResponse) {

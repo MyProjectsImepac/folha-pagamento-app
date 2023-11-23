@@ -15,7 +15,7 @@ export class collaboratorListComponent implements OnInit {
   collaborators: Collaborator[] = [];
   hasCollaboratorsEmpty: boolean = true;
 
-  constructor(private collaboratorService: CollaboratorService, router: Router) { }
+  constructor(private collaboratorService: CollaboratorService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadAllData();
@@ -34,6 +34,10 @@ export class collaboratorListComponent implements OnInit {
   deleteCollaborator(id: number) {
     this.collaboratorService.delete(id);
     location.reload();
+  }
+
+  updateCollaborator(id: number) {
+    this.router.navigate(['/collaborator-update', id]);
   }
 
 }

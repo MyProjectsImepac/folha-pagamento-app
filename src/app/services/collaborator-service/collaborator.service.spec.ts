@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CollaboratorService } from '../collaborator.service';
+import { CollaboratorService } from './collaborator.service';
 
 describe('CollaboratorService', () => {
   let service: CollaboratorService;

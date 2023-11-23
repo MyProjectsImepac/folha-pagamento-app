@@ -12,10 +12,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TeacherDetailsComponent } from './teacher-details/teacher-details.component';
 import { collaboratorListComponent } from './collaborator-list/collaborator-list.component';
-import { Collaborator } from './entities/collaborator';
 import { CollaboratorDetailsComponent } from './collaborator-details/collaborator-details.component';
 import { CollaboratorCreateComponent } from './collaborator-create/collaborator-create.component';
-import { CollaboratorUpdateComponent } from './collaborator-update/collaborator-update.component'
+import { CollaboratorUpdateComponent } from './collaborator-update/collaborator-update.component';
+
+
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { CollaboratorUpdateComponent } from './collaborator-update/collaborator-
       { path: 'collaborator-list', component: collaboratorListComponent },
       { path: 'about-us', component: AboutUsComponent },
       { path: 'collaborator-create', component: CollaboratorCreateComponent },
-      { path: 'collaborator-details/:id', component: CollaboratorDetailsComponent }
+      { path: 'collaborator-details/:id', component: CollaboratorDetailsComponent },
+      { path: 'collaborator-update/:id', component: CollaboratorUpdateComponent }
     ]),
     FormsModule,
     ReactiveFormsModule,
