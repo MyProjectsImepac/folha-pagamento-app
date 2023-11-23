@@ -19,25 +19,34 @@ export class CollaboratorUpdateComponent implements OnInit {
   showErrorAlert: boolean = false;
 
   ngOnInit(): void {
-    this.star();
+    this.initializeObject();
   }
   constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private collaborator: Collaborator, private httpClient: HttpClient, private collaboratorService: CollaboratorService, private router: Router) { }
 
   formData = this.formBuilder.group({
-    name: [this.collaborator.name, Validators.required], email: ['', [Validators.email, Validators.required]], valueHour: ['', Validators.required], publicPlace: '',
+    name: ["", Validators.required], email: ['', [Validators.email, Validators.required]], valueHour: ['', Validators.required], publicPlace: '',
     complement: '', neighborhood: '', city: '', state: '', zipCode: '', number: ''
   });
 
-  star() {
+  initializeObject() {
     let idLink: any = this.activatedRoute.snapshot.paramMap.get('id');
     this.collaboratorService.findById(idLink).subscribe(
       (collaboratorApi) => {
         this.collaborator = collaboratorApi as Collaborator;
-        console.log("Testando");
-        this.formData.patchValue({
-          name: this.collaborator.name
-        });
+        this.getPreviousData(this.collaborator);
       });
+  }
+
+  updateCollaborator() {
+    this.formDataToCollaborator();
+    this.collaboratorService.put(this.collaborator).subscribe(
+      (data) => {
+        this.router.navigate(["/collaborator-list"]);
+      },
+      (error) => {
+        this.showErrorAlert = true;
+      }
+    );
   }
 
   getZipCodeData() {
@@ -79,6 +88,20 @@ export class CollaboratorUpdateComponent implements OnInit {
     this.collaborator.address.complement = this.formData.get('complement')?.value!!;
     this.collaborator.address.zipCode = this.formData.get('zipCode')?.value!!;
     this.collaborator.valueHour = parseFloat(this.formData.get('valueHour')?.value!!);
+  }
+  getPreviousData(collaborator: Collaborator) {
+    this.formData.patchValue({
+      name: this.collaborator.name,
+      email: this.collaborator.email,
+      publicPlace: this.collaborator.address.publicPlace,
+      neighborhood: this.collaborator.address.neighborhood,
+      city: this.collaborator.address.city,
+      state: this.collaborator.address.state,
+      number: this.collaborator.address.number,
+      complement: this.collaborator.address.complement,
+      zipCode: this.collaborator.address.zipCode,
+      valueHour: this.collaborator.valueHour.toString()
+    });
   }
 
 }

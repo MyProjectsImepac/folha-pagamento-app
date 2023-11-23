@@ -20,7 +20,7 @@
         O valor hora e um campo obrigatório!
     </div>
 
-    <form class="form-horizontal" [formGroup]="formData" >
+    <form class="form-horizontal" [formGroup]="formData" (ngSubmit)="updateCollaborator()">
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">Nome *</label>
             <div class="col-sm-10">

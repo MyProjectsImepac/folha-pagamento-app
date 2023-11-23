@@ -34,13 +34,12 @@ export class CollaboratorService {
     this.httpClient.delete(`http://localhost:8081/folha-pagamento/collaborator/${id}`).subscribe();
   }
 
-  edit(collaborator: Collaborator): Observable<any> {
-    return this.httpClient.put(`http://localhost:8081/folha-pagamento/collaborator/`, collaborator.id)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          return throwError(error);
-        })
-      );
+  put(collaborator: Collaborator): Observable<any> {
+    return this.httpClient.put(`http://localhost:8081/folha-pagamento/collaborator/${collaborator.id}`,collaborator).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
+    );
   }
 
   testando(erro: HttpErrorResponse) {
