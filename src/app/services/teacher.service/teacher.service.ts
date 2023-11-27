@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Teacher } from '../entities/teacher';
-import { HttpClient } from '@angular/common/http';
+import { Teacher } from '../../entities/teacher';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,20 +11,14 @@ export class TeacherService {
 
   constructor(private httpClient: HttpClient) { }
 
-  save(teacher: Teacher): void {
-    this.httpClient.post("http://localhost:8081/folha-pagamento/teacher", teacher).subscribe(
-      {
-        next: (response) => {
-          console.log(response);
-        },
-        error: (e) => {
-          console.error(e);
-        },
-        complete() {
-          console.log("is completed");
+  save(teacher: Teacher): Observable<any> {
+    return this.httpClient.post("http://localhost:8081/folha-pagamento/teacher", teacher)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
         }
-      }
-    )
+        )
+      );
   }
 
   findById(id: number) {

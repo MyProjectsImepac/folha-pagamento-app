@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Signal, ViewChild } from '@angular/core';
-import { TeacherService } from '../services/teacher.service';
+import { TeacherService } from '../services/teacher.service/teacher.service';
 import { Teacher } from '../entities/teacher';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient, HttpResponse } from '@angular/common/http';
@@ -19,8 +19,10 @@ export class TeacherCreateComponent implements OnInit {
 
   addressApi: AddressApi = new AddressApi();
 
+  showErrorAlert: boolean = false;
+
   formData = this.formBuilder.group({
-    name: ['', Validators.required], email: ['', Validators.email], valueHour: ['', Validators.required], publicPlace: '',
+    name: ['', Validators.required], email: ['', [Validators.email, Validators.required]], valueHour: ['', Validators.required], publicPlace: '',
     complement: '', neighborhood: '', city: '', state: '', zipCode: '', number: ''
   });
 
@@ -29,12 +31,18 @@ export class TeacherCreateComponent implements OnInit {
   ngOnInit(): void { }
 
   addTeacher() {
-    console.warn('formData:', this.formData.value);
     this.formDataToTeacher()
-    this.teacherService.save(this.teacher);
-    window.alert("Professor adicionado com sucesso!");
-    this.router.navigate(["/teacher-list"]);
+    this.teacherService.save(this.teacher).subscribe(
+      (data) => {
+        this.router.navigate(["/collaborator-list"]);
+      },
+      (error) => {
+        this.showErrorAlert = true;
+      }
+    );
   }
+
+
 
   getZipCodeData() {
     this.httpClient.get(`https://viacep.com.br/ws/${this.formData.get('zipCode')?.value}/json`).subscribe({
@@ -77,5 +85,4 @@ export class TeacherCreateComponent implements OnInit {
     this.teacher.address.zipCode = this.formData.get('zipCode')?.value!!;
     this.teacher.valueHour = parseFloat(this.formData.get('valueHour')?.value!!);
   }
-
 }
