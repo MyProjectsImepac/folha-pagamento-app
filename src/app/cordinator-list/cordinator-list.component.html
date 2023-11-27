@@ -1,0 +1,28 @@
+<div class="container">
+    <h1>Listagem de coordenadores</h1> <span class="pull-right"><a class="btn btn-info"
+            routerLink="/cordinator-create">Registrar +</a></span>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="hasCordinatorsEmpty">
+                <td colspan="3">Nenhum registro encontrado!</td>
+            </tr>
+
+            <tr *ngFor="let cordinator of cordinators">
+                <td>{{cordinator.name}}</td>
+                <td>{{cordinator.email}}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" routerLink="/cordinator-edit/{{cordinator.id}}">Editar</a>&nbsp;
+                    <a class="btn btn-danger btn-sm" (click)="deleteCordinator(cordinator.id!!)">Deletar</a>&nbsp;
+                    <a class="btn btn-success btn-sm" routerLink="/cordinator-details/{{cordinator.id}}">Visualizar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

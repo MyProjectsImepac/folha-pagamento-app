@@ -1,0 +1,49 @@
+<div class="container">
+    <h1>Visualizar coordenador</h1>
+    <label for="name" class="control-label">Nome</label>
+    <div>{{cordinator.name}}</div>
+    <label for="email" class="control-label">Email *</label>
+    <div>{{cordinator.email}}</div>
+    <fieldset>
+        <legend>Endereço</legend>
+        <label for="zipCode" class=" control-label">CEP *</label>
+        <div>
+            {{cordinator.address.zipCode}}
+        </div>
+        <label for="publicPlace" class=" control-label">Logradouro *</label>
+        <div>
+            {{cordinator.address.publicPlace}}
+        </div>
+        <label for="neighborhood" class=" control-label">Bairro *</label>
+        <div>
+            {{cordinator.address.neighborhood}}
+        </div>
+        <label for="city" class=" control-label">Cidade *</label>
+        <div>
+            {{cordinator.address.city}}
+        </div>
+        <label for="state" class=" control-label">Estado *</label>
+        <div>
+            {{cordinator.address.state}}
+        </div>
+        <label for="number" class=" control-label">Numero *</label>
+        <div>
+            {{cordinator.address.number}}
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Dados profissionais</legend>
+        <label for="percentsStudent" class=" control-label">Percentual de estudanes*</label>
+        <div>
+            {{cordinator.percentsStudent}}
+        </div>
+        <label for="valuePayments" class=" control-label">Valor pagamentos*</label>
+        <div>
+            {{cordinator.valuePayments}}
+        </div>
+        <label for="amountStudents" class=" control-label">Quantidade de estudanes*</label>
+        <div>
+            {{cordinator.amountStudents}}
+        </div>
+    </fieldset>
+</div>
