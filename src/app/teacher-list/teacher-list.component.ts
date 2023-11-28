@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Teacher } from '../entities/teacher';
 import { Observable } from 'rxjs';
-import { TeacherService } from '../services/teacher.service';
+import { TeacherService } from '../services/teacher.service/teacher.service';
 import { Router } from '@angular/router';
 
 @Component({

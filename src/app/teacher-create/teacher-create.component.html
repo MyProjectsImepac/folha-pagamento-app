@@ -1,5 +1,20 @@
 <div class="container">
     <h1>Registrar professor</h1>
+
+    <div *ngIf="showErrorAlert" class="alert alert-danger" role="alert">
+        Ops! Algo deu errado ao salvar o colaborador. Por favor, tente novamente mais tarde.
+    </div>
+
+    <div *ngIf="formData.get('name')?.invalid && formData.get('name')?.touched" class="alert alert-warning"
+        role="alert">
+        O nome e um campo obrigatório!
+    </div>
+
+    <div *ngIf="formData.get('valueHour')?.invalid && formData.get('valueHour')?.touched" class="alert alert-warning"
+        role="alert">
+        O valor hora e um campo obrigatório!
+    </div>
+
     <form class="form-horizontal" [formGroup]="formData" (ngSubmit)="addTeacher()">
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">Nome *</label>
@@ -78,7 +93,7 @@
         </fieldset>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button [disabled]="formData.invalid" type="submit" class="btn btn-primary">Salvar</button>
             </div>
         </div>
     </form>
