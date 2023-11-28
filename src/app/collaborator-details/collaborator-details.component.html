@@ -1,0 +1,41 @@
+<div class="container">
+    <h1>Registrar professor</h1>
+    <label for="name" class="control-label">Nome</label>
+    <div>{{collaborator.name}}</div>
+    <label for="email" class="control-label">Email *</label>
+    <div>{{collaborator.email}}</div>
+    <fieldset>
+        <legend>Endereço</legend>
+        <label for="zipCode" class=" control-label">CEP *</label>
+        <div>
+            {{collaborator.address.zipCode}}
+        </div>
+        <label for="publicPlace" class=" control-label">Logradouro *</label>
+        <div>
+            {{collaborator.address.publicPlace}}
+        </div>
+        <label for="neighborhood" class=" control-label">Bairro *</label>
+        <div>
+            {{collaborator.address.neighborhood}}
+        </div>
+        <label for="city" class=" control-label">Cidade *</label>
+        <div>
+            {{collaborator.address.city}}
+        </div>
+        <label for="state" class=" control-label">Estado *</label>
+        <div>
+            {{collaborator.address.state}}
+        </div>
+        <label for="number" class=" control-label">Numero *</label>
+        <div>
+            {{collaborator.address.number}}
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Dados profissionais</legend>
+        <label for="valueHour" class=" control-label">Valor Hora *</label>
+        <div>
+            {{collaborator.valueHour}}
+        </div>
+    </fieldset>
+</div>
